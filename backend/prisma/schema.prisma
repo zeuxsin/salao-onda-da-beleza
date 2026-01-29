@@ -1,0 +1,41 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model Service {
+  id              Int      @id @default(autoincrement())
+  category        String
+  name            String   @unique
+  priceCents      Int
+  durationMinutes Int?
+  description     String?
+  active          Boolean  @default(true)
+  createdAt       DateTime @default(now())
+}
+
+model Product {
+  id          Int      @id @default(autoincrement())
+  name        String
+  category    String?
+  priceCents  Int
+  sizes       String?
+  description String?
+  imageUrl    String?
+  active      Boolean  @default(true)
+  createdAt   DateTime @default(now())
+}
+
+model Appointment {
+  id            Int      @id @default(autoincrement())
+  clientName    String
+  phone         String
+  serviceName   String?
+  preferredDate String?
+  notes         String?
+  status        String   @default("novo") // novo | contatado | fechado
+  createdAt     DateTime @default(now())
+}
